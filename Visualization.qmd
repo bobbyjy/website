@@ -1,5 +1,5 @@
 ---
-title: "About Me"
+title: "Visualization"
 ---
 
 My portfolio! I'll be storing examples of my work and skillset in this location.
@@ -7,5 +7,5 @@ My portfolio! I'll be storing examples of my work and skillset in this location.
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 ```{r}
-1 + 1
+#hi omg!
 ```
