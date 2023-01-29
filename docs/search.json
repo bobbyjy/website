@@ -12,5 +12,12 @@
     "title": "About Me",
     "section": "",
     "text": "My portfolio! I’ll be storing examples of my work and skillset in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Visualization.html",
+    "href": "Visualization.html",
+    "title": "Visualization",
+    "section": "",
+    "text": "My portfolio! I’ll be storing examples of my work and skillset in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n#hi omg!"
   }
 ]
