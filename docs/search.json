@@ -9,15 +9,15 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About Me",
+    "title": "Home",
     "section": "",
-    "text": "My portfolio! I’ll be storing examples of my work and skillset in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "My portfolio! I’ll be storing examples of my work and skill-set in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
   },
   {
     "objectID": "Visualization.html",
     "href": "Visualization.html",
     "title": "Visualization",
     "section": "",
-    "text": "My portfolio! I’ll be storing examples of my work and skillset in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n#hi omg!"
+    "text": "My portfolio! I’ll be storing examples of my work and skillset in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nggsurvplot(fit=km, data=ds,\n           legend = \"bottom\", \n           legend.title = \"Treatment Group\",\n           legend.labs = c(\"Combination\", \"Patch Only\"),\nrisk.table = F,conf.int=T) +\n    labs(\n        title=\"Survival Curve for Pharmaco Study\",\n        x=\"Time to Relapse)\"\n    )"
   }
 ]
