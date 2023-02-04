@@ -10,3 +10,9 @@ About this site: you don't need to know anyting about htis site
 #just testing out some changes!!!
 #more changes
 ```
+::: {layout-ncol=2}
+This fish is pretty neat
+![Surus](fish-facts-624x390.jpg)
+
+
+![Hanno](hanno.png)
