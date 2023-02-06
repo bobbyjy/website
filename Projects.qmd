@@ -105,9 +105,267 @@ df %>%
 ```
 ## Project 2:
 An example of a KNN model that we are building and improving in class
-```{r}
-1 + 1
 
-#just testing out some changes!!!
-#more changes
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+#install.packages("tm")
+library(tm) #for reading in text documents
+#install.packages("tidytext")
+library(tidytext) # for cleaning text and sentiments
+#install.packages("topicmodels")
+library(topicmodels) # for topic analysis
+#install.packages("janeaustenr")
+library(janeaustenr) # for free data
+library(dplyr) # for data manipulation
+library(tidyr)
+library(stringr) # for manipulating string/text data
+library(ggplot2) # for pretty graphs
+#install.packages("wordcloud")
+library(wordcloud) #duh
+#install.packages("stopwords")
+library(stopwords)
+library(ggplot2)
+library(tidyverse)
+library(caret)
+library(stringr)
+library(formatR)
+library(moderndive)
+library(fastDummies)
+
+wine <- read_rds("https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot.rds")
+
+
+# wine %>% 
+#   select(province) %>% 
+#   distinct()
+
+# Oregon				
+# California				
+# Burgundy				
+# Marlborough				
+# Casablanca_Valley				
+# New_York
+
+OrWine <- wine %>% filter(province == "Oregon") %>% select(description)
+CaWine <- wine %>% filter(province == "California") %>% select(description)
+BurWine <- wine %>% filter(province == "Burgundy") %>% select(description) 
+MarWine <- wine %>% filter(province == "Marlborough") %>% select(description)
+CasWine <- wine %>% filter(province == "Casablanca_Valley") %>% select(description)
+NewYWine <- wine %>% filter(province == "New_York") %>% select(description)
+
+OR <- tibble(txt=OrWine$description)
+CA <- tibble(txtCA=CaWine$description)
+BU <- tibble(txtBU=BurWine$description)
+MA <- tibble(txtMA=MarWine$description)
+CAS <- tibble(txtCAS=CasWine$description)
+NY <- tibble(txtNY=NewYWine$description)
+
+OR<-OR %>% 
+  unnest_tokens(word,txt)
+CA<-CA %>% 
+  unnest_tokens(word,txtCA)
+BU<-BU %>% 
+  unnest_tokens(word,txtBU)
+MA<-MA %>% 
+  unnest_tokens(word,txtMA)
+CAS<-CAS %>% 
+  unnest_tokens(word,txtCAS)
+NY<-NY %>% 
+  unnest_tokens(word,txtNY)
+
+cleaned_OR <- OR %>% 
+  anti_join(get_stopwords())
+cleaned_CA <- CA %>% 
+  anti_join(get_stopwords())
+cleaned_BU <- BU %>% 
+  anti_join(get_stopwords())
+cleaned_MA <- MA %>% 
+  anti_join(get_stopwords())
+cleaned_CAS <- CAS %>% 
+  anti_join(get_stopwords())
+cleaned_NY <- NY %>% 
+  anti_join(get_stopwords())
+
+
+cleaned_OR <- cleaned_OR %>% 
+  group_by(word) %>% 
+  summarise(word, n = n()) %>% 
+  distinct() %>% 
+  filter(n>400) %>% 
+  arrange(desc(n))
+cleaned_CA <- cleaned_CA %>% 
+  group_by(word) %>% 
+  summarise(word, n = n()) %>% 
+  distinct() %>% 
+  filter(n>400) %>% 
+  arrange(desc(n))
+cleaned_BU <- cleaned_BU %>% 
+  group_by(word) %>% 
+  summarise(word, n = n()) %>% 
+  distinct() %>% 
+  filter(n>400) %>% 
+  arrange(desc(n))
+cleaned_MA <- cleaned_MA %>% 
+  group_by(word) %>% 
+  summarise(word, n = n()) %>% 
+  distinct() %>% 
+  filter(n>50) %>% 
+  arrange(desc(n))
+cleaned_CAS <- cleaned_CAS %>% 
+  group_by(word) %>% 
+  summarise(word, n = n()) %>% 
+  distinct() %>% 
+  filter(n>50) %>% 
+  arrange(desc(n))
+cleaned_NY <- cleaned_NY %>% 
+  group_by(word) %>% 
+  summarise(word, n = n()) %>% 
+  distinct() %>% 
+  filter(n>50) %>% 
+  arrange(desc(n))
+
+
+
+a<-cleaned_OR %>% ggplot(aes(reorder(word,n), n, fill = n))+
+  geom_col(show.legend = FALSE) +
+  labs(title = "Oregon Word Descriptors over 400 Occurences")+
+  #CoreyPlotTheme+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+b<-cleaned_CA %>% ggplot(aes(reorder(word,n), n, fill = n))+
+  geom_col(show.legend = FALSE) +
+  labs(title = "California Word Descriptors over 400 Occurences")+
+  #CoreyPlotTheme+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+c<-cleaned_BU %>% ggplot(aes(reorder(word,n), n, fill = n))+
+  geom_col(show.legend = FALSE) +
+  labs(title = "Burgondy? Word Descriptors over 400 Occurences")+
+  #CoreyPlotTheme+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+d<-cleaned_MA %>% ggplot(aes(reorder(word,n), n, fill = n))+
+  geom_col(show.legend = FALSE) +
+  labs(title = "Malboro? Word Descriptors over 50 Occurences")+
+  #CoreyPlotTheme+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+e<-cleaned_CAS %>% ggplot(aes(reorder(word,n), n, fill = n))+
+  geom_col(show.legend = FALSE) +
+  labs(title = "Casa-whatever Word Descriptors over 50 Occurences")+
+  #CoreyPlotTheme+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+f<-cleaned_NY %>% ggplot(aes(reorder(word,n), n, fill = n))+
+  geom_col(show.legend = FALSE) +
+  labs(title = "New York Word Descriptors over 50 Occurences")+
+  #CoreyPlotTheme+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+#oregon: new chocolate black oak tart oregon
+#california: aromas palate bottling spice california
+#burgondy: ripe tannins drink Burgundy
+#malboro: medium noir notes now Marlborough
+#casan:plumb, finish, aromas, flavors Casablanca_Valley
+#newyork: New_York
+#wine$new <- ifelse(str_detect(wine$description, regex('new', ignore_case = T)),1,0)
+wine$chocolate <- ifelse(str_detect(wine$description, regex('chocolate', ignore_case = T)),1,0)
+wine$black <- ifelse(str_detect(wine$description, regex('black', ignore_case = T)),1,0)
+wine$oak <- ifelse(str_detect(wine$description, regex('oak', ignore_case = T)),1,0)
+wine$tart <- ifelse(str_detect(wine$description, regex('tart', ignore_case = T)),1,0)
+wine$oregon <- ifelse(str_detect(wine$description, regex('oregon', ignore_case = T)),1,0)
+wine$aroma <- ifelse(str_detect(wine$description, regex('aroma', ignore_case = T)),1,0)
+wine$palate <- ifelse(str_detect(wine$description, regex('palate', ignore_case = T)),1,0)
+wine$bottling <- ifelse(str_detect(wine$description, regex('bottling', ignore_case = T)),1,0)
+wine$spice <- ifelse(str_detect(wine$description, regex('spice', ignore_case = T)),1,0)
+wine$california <- ifelse(str_detect(wine$description, regex('california', ignore_case = T)),1,0)
+wine$ripe <- ifelse(str_detect(wine$description, regex('ripe', ignore_case = T)),1,0)
+wine$tannin <- ifelse(str_detect(wine$description, regex('tannin', ignore_case = T)),1,0)
+wine$drink <- ifelse(str_detect(wine$description, regex('drink', ignore_case = T)),1,0)
+wine$burgundy <- ifelse(str_detect(wine$description, regex('burgundy', ignore_case = T)),1,0)
+wine$medium <- ifelse(str_detect(wine$description, regex('medium', ignore_case = T)),1,0)
+wine$noir <- ifelse(str_detect(wine$description, regex('noir', ignore_case = T)),1,0) # marlborlal..ish?
+wine$note <- ifelse(str_detect(wine$description, regex('note', ignore_case = T)),1,0)
+wine$now <- ifelse(str_detect(wine$description, regex('now', ignore_case = T)),1,0)
+wine$marlborough <- ifelse(str_detect(wine$description, regex('marlborough', ignore_case = T)),1,0)
+wine$plum <- ifelse(str_detect(wine$description, regex('plum', ignore_case = T)),1,0)
+
+wine$finish <- ifelse(str_detect(wine$description, regex('finish', ignore_case = T)),1,0)
+wine$flavor <- ifelse(str_detect(wine$description, regex('flavor', ignore_case = T)),1,0)
+wine$casa <- ifelse(str_detect(wine$description, regex('casablanca', ignore_case = T)),1,0)
+wine$newyork <- ifelse(str_detect(wine$description, regex('new york', ignore_case = T)),1,0)
+wine$cola <- ifelse(str_detect(wine$description, regex('cola', ignore_case = T)),1,0)
+wine$forward <- ifelse(str_detect(wine$description, regex('forward', ignore_case = T)),1,0)
+wine$estate <- ifelse(str_detect(wine$description, regex('estate', ignore_case = T)),1,0)
+wine$spicy <- ifelse(str_detect(wine$description, regex('spicy', ignore_case = T)),1,0)
+wine$herb <- ifelse(str_detect(wine$description, regex('herb', ignore_case = T)),1,0)
+wine$french <- ifelse(str_detect(wine$description, regex('french', ignore_case = T)),1,0)
+wine$elegant <- ifelse(str_detect(wine$description, regex('elegant', ignore_case = T)),1,0)
+wine$earth <- ifelse(str_detect(wine$description, regex('earth', ignore_case = T)),1,0)
+wine$acidity <- ifelse(str_detect(wine$description, regex('acidity', ignore_case = T)),1,0)
+wine$raspberry <- ifelse(str_detect(wine$description, regex('raspberry', ignore_case = T)),1,0)
+#^just these factors make a .5!
+wine$structure <- ifelse(str_detect(wine$description, regex('structure', ignore_case = T)),1,0)
+wine$wood <- ifelse(str_detect(wine$description, regex('wood', ignore_case = T)),1,0)
+wine$aging <- ifelse(str_detect(wine$description, regex('aging', ignore_case = T)),1,0)
+wine$soft <- ifelse(str_detect(wine$description, regex('soft', ignore_case = T)),1,0)
+wine$firm <- ifelse(str_detect(wine$description, regex('firm', ignore_case = T)),1,0)
+#^just these factors make a .53
+wine$supple <- ifelse(str_detect(wine$description, regex('supple', ignore_case = T)),1,0)
+wine$long <- ifelse(str_detect(wine$description, regex('long', ignore_case = T)),1,0)
+wine$crisp <- ifelse(str_detect(wine$description, regex('crisp', ignore_case = T)),1,0)
+wine$dusty <- ifelse(str_detect(wine$description, regex('dusty', ignore_case = T)),1,0)
+# wine$mocha <- ifelse(str_detect(wine$description, regex('mocha', ignore_case = T)),1,0)
+#these made it worse (below)
+#  wine$appellation <- ifelse(str_detect(wine$description, regex('appellation', ignore_case = T)),1,0)
+# wine$baked <- ifelse(str_detect(wine$description, regex('baked', ignore_case = T)),1,0)
+# wine$concentrated <- ifelse(str_detect(wine$description, regex('concentrated', ignore_case = T)),1,0)
+#  wine$anise <- ifelse(str_detect(wine$description, regex('anise', ignore_case = T)),1,0)
+ #cuvée
+ 
+wine$cuv <- ifelse(str_detect(wine$description, regex('cuvée', ignore_case = T)),1,0)
+wine$core <- ifelse(str_detect(wine$description, regex('core', ignore_case = T)),1,0)
+wine$leaf <- ifelse(str_detect(wine$description, regex('leaf', ignore_case = T)),1,0)
+wine$rich <- ifelse(str_detect(wine$description, regex('rich', ignore_case = T)),1,0)
+wine$months <- ifelse(str_detect(wine$description, regex('months', ignore_case = T)),1,0)
+#.547^
+#wine$y2025 <- ifelse(str_detect(wine$description, regex('2025', ignore_case = T)),1,0)
+#wine$hills <- ifelse(str_detect(wine$description, regex('hills', ignore_case = T)),1,0)
+#wine$ava <- ifelse(str_detect(wine$description, regex('ava', ignore_case = T)),1,0)
+# wine$clove <- ifelse(str_detect(wine$description, regex('clove', ignore_case = T)),1,0)
+# wine$savory <- ifelse(str_detect(wine$description, regex('savory', ignore_case = T)),1,0)
+# 
+# wine$pepper <- ifelse(str_detect(wine$description, regex('pepper', ignore_case = T)),1,0)
+
+wine <- wine %>% 
+  mutate(points = scale(points, center = T, scale = T)) %>%
+  mutate(price = scale(log(price), center = T, scale = T)) %>% 
+  select(-id,-description)
+```
+
+### Model performance across provinces:
+
+```{r}
+#PROJECT 1 Feature Engineering
+set.seed(504)
+wine_index <- createDataPartition(wine$province, p = 0.8, list = FALSE)
+train <- wine[ wine_index, ]
+test <- wine[-wine_index, ]
+
+#10 fold cross validation
+control <- trainControl(
+                           method = "repeatedcv",
+                           number = 5,
+                           repeats = 3
+                           )
+
+fit <- train(province ~ .,
+             data = train, 
+             method = "knn",#knn
+             tuneLength = 20, #the 30 different values for K
+             metric = "Kappa",
+             trControl = control)
+
+confusionMatrix(predict(fit, test),factor(test$province))
+
+#fit
+```
+
+### Which K value is ideal?
+```{r}
+ggplot(fit, metric="Kappa")
 ```

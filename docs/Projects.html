@@ -170,7 +170,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#project-1" id="toc-project-1" class="nav-link active" data-scroll-target="#project-1">Project 1:</a></li>
-  <li><a href="#project-2" id="toc-project-2" class="nav-link" data-scroll-target="#project-2">Project 2:</a></li>
+  <li><a href="#project-2" id="toc-project-2" class="nav-link" data-scroll-target="#project-2">Project 2:</a>
+  <ul class="collapse">
+  <li><a href="#model-performance-across-provinces" id="toc-model-performance-across-provinces" class="nav-link" data-scroll-target="#model-performance-across-provinces">Model performance across provinces:</a></li>
+  <li><a href="#which-k-value-is-ideal" id="toc-which-k-value-is-ideal" class="nav-link" data-scroll-target="#which-k-value-is-ideal">Which K value is ideal?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -207,15 +211,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="project-2">Project 2:</h2>
 <p>An example of a KNN model that we are building and improving in class</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<section id="model-performance-across-provinces" class="level3">
+<h3 class="anchored" data-anchor-id="model-performance-across-provinces">Model performance across provinces:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PROJECT 1 Feature Engineering</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">504</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>wine_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(wine<span class="sc">$</span>province, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> wine[ wine_index, ]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> wine[<span class="sc">-</span>wine_index, ]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#10 fold cross validation</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">"repeatedcv"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">5</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">3</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           )</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(province <span class="sc">~</span> .,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"knn"</span>,<span class="co">#knn</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">20</span>, <span class="co">#the 30 different values for K</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"Kappa"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> control)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>province))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>Confusion Matrix and Statistics
+
+                   Reference
+Prediction          Burgundy California Casablanca_Valley Marlborough New_York
+  Burgundy               214          7                 0           4        2
+  California               4        699                 7          16       10
+  Casablanca_Valley        0          0                 8           0        1
+  Marlborough              0          1                 0           7        1
+  New_York                 0          0                 0           1        2
+  Oregon                  20         84                11          17       10
+                   Reference
+Prediction          Oregon
+  Burgundy              16
+  California           136
+  Casablanca_Valley      1
+  Marlborough            0
+  New_York               0
+  Oregon               394
+
+Overall Statistics
+                                          
+               Accuracy : 0.7914          
+                 95% CI : (0.7711, 0.8106)
+    No Information Rate : 0.4728          
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+                                          
+                  Kappa : 0.6678          
+                                          
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: Burgundy Class: California Class: Casablanca_Valley
+Sensitivity                   0.8992            0.8837                 0.307692
+Specificity                   0.9798            0.8039                 0.998786
+Pos Pred Value                0.8807            0.8016                 0.800000
+Neg Pred Value                0.9832            0.8851                 0.989176
+Prevalence                    0.1423            0.4728                 0.015541
+Detection Rate                0.1279            0.4178                 0.004782
+Detection Prevalence          0.1452            0.5212                 0.005977
+Balanced Accuracy             0.9395            0.8438                 0.653239
+                     Class: Marlborough Class: New_York Class: Oregon
+Sensitivity                    0.155556        0.076923        0.7203
+Specificity                    0.998771        0.999393        0.8739
+Pos Pred Value                 0.777778        0.666667        0.7351
+Neg Pred Value                 0.977163        0.985629        0.8654
+Prevalence                     0.026898        0.015541        0.3270
+Detection Rate                 0.004184        0.001195        0.2355
+Detection Prevalence           0.005380        0.001793        0.3204
+Balanced Accuracy              0.577164        0.538158        0.7971</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#just testing out some changes!!!</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#more changes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="which-k-value-is-ideal" class="level3">
+<h3 class="anchored" data-anchor-id="which-k-value-is-ideal">Which K value is ideal?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fit, <span class="at">metric=</span><span class="st">"Kappa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projects_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
