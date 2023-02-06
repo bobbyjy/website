@@ -15,7 +15,8 @@ About this site: you don't need to know anyting about htis site
 ::: {layout-ncol=2}
 This fish is pretty neat
 ![Surus](fish-facts-624x390.jpg)
-```{r}
+```{r, echo=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 library(tidyverse)
 #install.packages("camcorder")
 #install.packages("MetBrewer")
@@ -29,7 +30,11 @@ gg_record(dir = "tidytuesday-temp", device = "png", width = 8, height = 9.5, uni
 
 cats_uk <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-31/cats_uk.csv')
 
+write.csv(cats_uk,"C:\\Users\\corey\\OneDrive\\Desktop\\01_Willamette U\\Semester 1\\6021\\test.csv", row.names=FALSE)
+
+
 cats_uk_reference <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-31/cats_uk_reference.csv')
+write.csv(cats_uk_reference,"C:\\Users\\corey\\OneDrive\\Desktop\\01_Willamette U\\Semester 1\\6021\\test2.csv", row.names=FALSE)
 
 center_cats <- cats_uk %>% 
   left_join(cats_uk_reference) %>% 
@@ -74,7 +79,7 @@ f2 <- "Lobster"
 
 pal <- rev(MetBrewer::met.brewer("Hokusai2")[3:7])
            
-ggplot(center_cats) +
+a<-ggplot(center_cats) +
   ggforce::geom_circle(data = circles, aes(x0 = x0, y0 = y0, r = r, fill = r), linewidth = 0.1, color = NA, alpha = 0.5) +
   ggshadow::geom_shadowpath(aes(x, y, group = tag_id), size = 0.5, color = "#F5C400", shadowsize = 0.8, shadowcolor = "#3A3F77") +
   geom_text(data = counts, aes(0, -0.0155, label = paste0(n, " cats")), stat = "unique", family = f1, color = "white") +
@@ -102,4 +107,8 @@ ggplot(center_cats) +
   
 
 ```
+```{r}
+a
+```
+
 
