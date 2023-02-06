@@ -172,7 +172,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#project-1" id="toc-project-1" class="nav-link active" data-scroll-target="#project-1">Project 1:</a></li>
   <li><a href="#project-2" id="toc-project-2" class="nav-link" data-scroll-target="#project-2">Project 2:</a>
   <ul class="collapse">
-  <li><a href="#model-performance-across-provinces" id="toc-model-performance-across-provinces" class="nav-link" data-scroll-target="#model-performance-across-provinces">Model performance across provinces:</a></li>
+  <li><a href="#understanding-most-frequently-used-regional-descriptors" id="toc-understanding-most-frequently-used-regional-descriptors" class="nav-link" data-scroll-target="#understanding-most-frequently-used-regional-descriptors">Understanding most frequently used regional descriptors…</a></li>
+  <li><a href="#how-does-the-model-perform-across-provinces" id="toc-how-does-the-model-perform-across-provinces" class="nav-link" data-scroll-target="#how-does-the-model-perform-across-provinces">How does the model perform across provinces?</a></li>
   <li><a href="#which-k-value-is-ideal" id="toc-which-k-value-is-ideal" class="nav-link" data-scroll-target="#which-k-value-is-ideal">Which K value is ideal?</a></li>
   </ul></li>
   </ul>
@@ -209,12 +210,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="project-2" class="level2">
 <h2 class="anchored" data-anchor-id="project-2">Project 2:</h2>
-<p>An example of a KNN model that we are building and improving in class</p>
+<p>An example of a KNN model that we are building and improving in class. The objective is to accurately predict the regional origin of a bottle of wine.</p>
+<section id="understanding-most-frequently-used-regional-descriptors" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-most-frequently-used-regional-descriptors">Understanding most frequently used regional descriptors…</h3>
 <div class="cell">
-
+<div class="cell-output-display">
+<p><img src="Projects_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="960"></p>
 </div>
-<section id="model-performance-across-provinces" class="level3">
-<h3 class="anchored" data-anchor-id="model-performance-across-provinces">Model performance across provinces:</h3>
+</div>
+</section>
+<section id="how-does-the-model-perform-across-provinces" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-the-model-perform-across-provinces">How does the model perform across provinces?</h3>
+<p>Accuracy is very high for Burgundy, California, and Oregon regions. Smaller regions performed substantially worse, potentially due to significantly lower availability of data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PROJECT 1 Feature Engineering</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">504</span>)</span>
@@ -289,13 +296,13 @@ Detection Rate                 0.004184        0.001195        0.2355
 Detection Prevalence           0.005380        0.001793        0.3204
 Balanced Accuracy              0.577164        0.538158        0.7971</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="which-k-value-is-ideal" class="level3">
 <h3 class="anchored" data-anchor-id="which-k-value-is-ideal">Which K value is ideal?</h3>
+<p>This graphs kappa performance of the model over a range of K values. Kappa is a measure of model performance against random chance classification. We want to achieve the highest kappa value possible.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fit, <span class="at">metric=</span><span class="st">"Kappa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fit, <span class="at">metric=</span><span class="st">"Kappa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Projects_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>

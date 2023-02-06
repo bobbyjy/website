@@ -104,9 +104,11 @@ df %>%
 
 ```
 ## Project 2:
-An example of a KNN model that we are building and improving in class
+An example of a KNN model that we are building and improving in class. The objective is to accurately predict the regional origin of a bottle of wine. 
 
-```{r, echo=FALSE,message=FALSE, warning=FALSE}
+### Understanding most frequently used regional descriptors...
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE, fig.height = 10, fig.width=10}
 #install.packages("tm")
 library(tm) #for reading in text documents
 #install.packages("tidytext")
@@ -130,6 +132,7 @@ library(stringr)
 library(formatR)
 library(moderndive)
 library(fastDummies)
+library(gridExtra)
 
 wine <- read_rds("https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot.rds")
 
@@ -229,40 +232,43 @@ a<-cleaned_OR %>% ggplot(aes(reorder(word,n), n, fill = n))+
   geom_col(show.legend = FALSE) +
   labs(title = "Oregon Word Descriptors over 400 Occurences")+
   #CoreyPlotTheme+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 3), plot.title = element_text(size=5))
 b<-cleaned_CA %>% ggplot(aes(reorder(word,n), n, fill = n))+
   geom_col(show.legend = FALSE) +
+    theme_bw()+
   labs(title = "California Word Descriptors over 400 Occurences")+
   #CoreyPlotTheme+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 3), plot.title = element_text(size=5))
 c<-cleaned_BU %>% ggplot(aes(reorder(word,n), n, fill = n))+
   geom_col(show.legend = FALSE) +
+    theme_bw()+
   labs(title = "Burgondy? Word Descriptors over 400 Occurences")+
   #CoreyPlotTheme+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 3), plot.title = element_text(size=5))
 d<-cleaned_MA %>% ggplot(aes(reorder(word,n), n, fill = n))+
   geom_col(show.legend = FALSE) +
+    theme_bw()+
   labs(title = "Malboro? Word Descriptors over 50 Occurences")+
   #CoreyPlotTheme+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 3), plot.title = element_text(size=5))
 e<-cleaned_CAS %>% ggplot(aes(reorder(word,n), n, fill = n))+
   geom_col(show.legend = FALSE) +
+    theme_bw()+
   labs(title = "Casa-whatever Word Descriptors over 50 Occurences")+
   #CoreyPlotTheme+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 3), plot.title = element_text(size=5))
 f<-cleaned_NY %>% ggplot(aes(reorder(word,n), n, fill = n))+
   geom_col(show.legend = FALSE) +
+    theme_bw()+
   labs(title = "New York Word Descriptors over 50 Occurences")+
   #CoreyPlotTheme+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 3), plot.title = element_text(size=5))
 
-#oregon: new chocolate black oak tart oregon
-#california: aromas palate bottling spice california
-#burgondy: ripe tannins drink Burgundy
-#malboro: medium noir notes now Marlborough
-#casan:plumb, finish, aromas, flavors Casablanca_Valley
-#newyork: New_York
-#wine$new <- ifelse(str_detect(wine$description, regex('new', ignore_case = T)),1,0)
+grid.arrange(arrangeGrob(a,b,c,ncol=3), arrangeGrob(d,e,f,ncol=3), nrow=2)
+
+
+
 wine$chocolate <- ifelse(str_detect(wine$description, regex('chocolate', ignore_case = T)),1,0)
 wine$black <- ifelse(str_detect(wine$description, regex('black', ignore_case = T)),1,0)
 wine$oak <- ifelse(str_detect(wine$description, regex('oak', ignore_case = T)),1,0)
@@ -309,27 +315,13 @@ wine$supple <- ifelse(str_detect(wine$description, regex('supple', ignore_case =
 wine$long <- ifelse(str_detect(wine$description, regex('long', ignore_case = T)),1,0)
 wine$crisp <- ifelse(str_detect(wine$description, regex('crisp', ignore_case = T)),1,0)
 wine$dusty <- ifelse(str_detect(wine$description, regex('dusty', ignore_case = T)),1,0)
-# wine$mocha <- ifelse(str_detect(wine$description, regex('mocha', ignore_case = T)),1,0)
-#these made it worse (below)
-#  wine$appellation <- ifelse(str_detect(wine$description, regex('appellation', ignore_case = T)),1,0)
-# wine$baked <- ifelse(str_detect(wine$description, regex('baked', ignore_case = T)),1,0)
-# wine$concentrated <- ifelse(str_detect(wine$description, regex('concentrated', ignore_case = T)),1,0)
-#  wine$anise <- ifelse(str_detect(wine$description, regex('anise', ignore_case = T)),1,0)
- #cuvée
- 
+
 wine$cuv <- ifelse(str_detect(wine$description, regex('cuvée', ignore_case = T)),1,0)
 wine$core <- ifelse(str_detect(wine$description, regex('core', ignore_case = T)),1,0)
 wine$leaf <- ifelse(str_detect(wine$description, regex('leaf', ignore_case = T)),1,0)
 wine$rich <- ifelse(str_detect(wine$description, regex('rich', ignore_case = T)),1,0)
 wine$months <- ifelse(str_detect(wine$description, regex('months', ignore_case = T)),1,0)
 #.547^
-#wine$y2025 <- ifelse(str_detect(wine$description, regex('2025', ignore_case = T)),1,0)
-#wine$hills <- ifelse(str_detect(wine$description, regex('hills', ignore_case = T)),1,0)
-#wine$ava <- ifelse(str_detect(wine$description, regex('ava', ignore_case = T)),1,0)
-# wine$clove <- ifelse(str_detect(wine$description, regex('clove', ignore_case = T)),1,0)
-# wine$savory <- ifelse(str_detect(wine$description, regex('savory', ignore_case = T)),1,0)
-# 
-# wine$pepper <- ifelse(str_detect(wine$description, regex('pepper', ignore_case = T)),1,0)
 
 wine <- wine %>% 
   mutate(points = scale(points, center = T, scale = T)) %>%
@@ -337,9 +329,10 @@ wine <- wine %>%
   select(-id,-description)
 ```
 
-### Model performance across provinces:
+### How does the model perform across provinces?
+Accuracy is very high for Burgundy, California, and Oregon regions. Smaller regions performed substantially worse, potentially due to significantly lower availability of data. 
 
-```{r}
+```{r, fig.width=10}
 #PROJECT 1 Feature Engineering
 set.seed(504)
 wine_index <- createDataPartition(wine$province, p = 0.8, list = FALSE)
@@ -361,11 +354,10 @@ fit <- train(province ~ .,
              trControl = control)
 
 confusionMatrix(predict(fit, test),factor(test$province))
-
-#fit
 ```
 
 ### Which K value is ideal?
+This graphs kappa performance of the model over a range of K values. Kappa is a measure of model performance against random chance classification. We want to achieve the highest kappa value possible. 
 ```{r}
 ggplot(fit, metric="Kappa")
 ```
