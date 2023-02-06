@@ -6,9 +6,7 @@ website:
   title: "Portfolio"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - href: about.qmd
       - Projects.qmd
 
 format:
