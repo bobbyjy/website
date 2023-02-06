@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2\n\n#just testing out some changes!!!\n#more changes"
+    "text": "About me!\n\n1 + 1\n\n[1] 2\n\n#just testing out some changes!!!\n#more changes\n\n\n\n\nElephant"
   },
   {
     "objectID": "AnotherNewTab.html",
@@ -18,7 +18,14 @@
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "My portfolio! I’ll be storing examples of my work and skill-set in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "My portfolio! I’ll be storing examples of my work and skill-set in this location.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Projects.html",
+    "href": "Projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Project 1: As an introductory project aimed at exploring the functionality of Quarto and Github I have replicated an entry from #tidytuesday\n\n1 + 1\n\n[1] 2\n\n#just testing out some changes!!!\n#more changes\n\nProject 2: An example of a KNN model that we are building and improving in class\n\n1 + 1\n\n[1] 2\n\n#just testing out some changes!!!\n#more changes"
   },
   {
     "objectID": "Visualization.html",

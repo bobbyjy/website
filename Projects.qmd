@@ -1,0 +1,21 @@
+---
+title: "Projects"
+---
+
+Project 1:
+As an introductory project aimed at exploring the functionality of Quarto and Github I have replicated an entry from #tidytuesday
+
+```{r}
+1 + 1
+
+#just testing out some changes!!!
+#more changes
+```
+Project 2:
+An example of a KNN model that we are building and improving in class
+```{r}
+1 + 1
+
+#just testing out some changes!!!
+#more changes
+```
