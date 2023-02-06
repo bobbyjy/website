@@ -37,16 +37,37 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Home",
+    "title": "Corey Cassell",
     "section": "",
-    "text": "My portfolio! I’ll be storing examples of my work and skill-set in this location.\n\n1 + 1\n\n[1] 2"
+    "text": "A Portland Oregon based engineer and masters in data science candidate with 7+ years of broad-based experience utilizing advanced data and analytical tools, building production grade metrics and visualizations, while integrating industrial engineering principles to drive continuous improvement for domestic and international customers."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Corey Cassell",
+    "section": "Education",
+    "text": "Education\nWillamette University\nMasters in Data Science (MSDS) Planned Graduation August 2023\nCalifornia Polytechnical State University, San Luis Obispo\nBachelor of Science, Industrial Engineering"
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Corey Cassell",
+    "section": "Skills",
+    "text": "Skills\nSOFTWARE, PLATFORMS, AND PROGRAMMING\n\nSQL – Accessing, cleaning, and joining high volume data in a fast-paced manufacturing environment.\nR – Crafting visualizations through base\nR and ggplot. Writing web scraping scripts. Tuning and implementing machine learning models.\nTableau – Design, build, implementation of production facing metrics and analytical tools for manager and executive level communication. Improving user access and understanding of production performance to enable better allocation of resources.\nAccess/Excel/VBA – creating automated metrics and scrips to answer emergent questions.\nBASH – Basic file navigation and manipulation. Remote server interaction. Docker file building and deployment.\n\nGitHub – Project management and version control.\nPython – Basic level understanding and capability.\n\nDATA SCIENCE\n\nData Visualization – Using R and Tableau to analyze and interpret business anomalies through uncovering hidden trends.\nData Engineering – Employing the ETL process in the setup, design, and management of PostgreSQL server/database relationship. joining of tables from cross platform databases (Teradata/Oracle/Microsoft SQL Server) and transforming information into useable content.\n\nMachine learning – Leveraging linear regression-based models to predict next day manufacturing performance for more efficient current day resource allocation.\nSurvival Analysis and survival curve plotting to predict product life expectancy"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Corey Cassell",
+    "section": "Experience",
+    "text": "Experience\nINDUSTRIAL ENGINEER III, BOEING October 2016 – Current\nBOEING PORTLAND, OR, USA – SUPPORT FOR ACTUATION SYSTEMS MANUFACTURING TEAM\n\nTeam focal for analytics and metrics development using Tableau, Access, and Excel platforms\nGeneration of Tableau dashboards through the integration of multiplatform SQL query building\nDevelopment of statistical standard processes for production performance visibility including data cleaning, preparation, analysis, and site leadership level communication\nAutomated daily report design, construction, and support\nMachining cell layout design and implementation\nDetailed production schedule recovery planning\nPlant staffing and machining capacity analysis in dynamic demand environment\n\nBOEING SHEFFIELD, UK – 7 MONTHS TEMPORARY ASSIGNMENT\n\nUser story design and development for web metric deployment\nOperation level time study analysis enabling targeted problem solving for cycle time reduction\nTraining and support of Sheffield IE team\nLean 3P (production preparation process) workshop support for transmission housings\nThird party supplier capacity and supply chain buffering analysis\nWork statement and movement scenario analysis providing solutions for over capacity cells\nNew product cross site production planning and integration"
   },
   {
     "objectID": "Projects.html",
     "href": "Projects.html",
     "title": "Projects",
     "section": "",
-    "text": "As an introductory project aimed at exploring the functionality of Quarto and Github I have replicated an entry from #tidytuesday For this example I am using code from a submission by @ryanahart with (code: https://github.com/curatedmess/TidyTuesday/blob/main/2023/01312023/cats.R)"
+    "text": "As an introductory project aimed at exploring the functionality of Quarto and Github I have replicated an entry from #tidytuesday For this example I am using code from a submission by @ryanahart with (code: https://github.com/curatedmess/TidyTuesday/blob/main/2023/01312023/cats.R)\n\n\n\n\n\n\n\n\n\n\nSimplified the visual into a bar chart to align the information along a common axis and make each cat easier to compare."
   },
   {
     "objectID": "Projects.html#project-2",

@@ -142,8 +142,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="./home">
+ <span class="menu-text"></span></a>
+  </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link" href="./index.html">
  <span class="menu-text">Corey Cassell</span></a>
   </li>  
   <li class="nav-item">
@@ -165,7 +169,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-1" id="toc-project-1" class="nav-link active" data-scroll-target="#project-1">Project 1:</a></li>
+  <li><a href="#project-1" id="toc-project-1" class="nav-link active" data-scroll-target="#project-1">Project 1:</a>
+  <ul class="collapse">
+  <li><a href="#ryanaharts-plot" id="toc-ryanaharts-plot" class="nav-link" data-scroll-target="#ryanaharts-plot"><span class="citation" data-cites="ryanahart">@ryanahart</span>’s plot:</a></li>
+  <li><a href="#making-the-data-easier-to-visualize-my-version" id="toc-making-the-data-easier-to-visualize-my-version" class="nav-link" data-scroll-target="#making-the-data-easier-to-visualize-my-version">Making the data easier to visualize (my version)…</a></li>
+  </ul></li>
   <li><a href="#project-2" id="toc-project-2" class="nav-link" data-scroll-target="#project-2">Project 2:</a>
   <ul class="collapse">
   <li><a href="#understanding-most-frequently-used-regional-descriptors" id="toc-understanding-most-frequently-used-regional-descriptors" class="nav-link" data-scroll-target="#understanding-most-frequently-used-regional-descriptors">Understanding most frequently used regional descriptors…</a></li>
@@ -198,11 +206,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="project-1" class="level2">
 <h2 class="anchored" data-anchor-id="project-1">Project 1:</h2>
 <p>As an introductory project aimed at exploring the functionality of Quarto and Github I have replicated an entry from #tidytuesday For this example I am using code from a submission by <span class="citation" data-cites="ryanahart">@ryanahart</span> with (code: https://github.com/curatedmess/TidyTuesday/blob/main/2023/01312023/cats.R)</p>
+<section id="ryanaharts-plot" class="level3">
+<h3 class="anchored" data-anchor-id="ryanaharts-plot"><span class="citation" data-cites="ryanahart">@ryanahart</span>’s plot:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="Projects_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
+</section>
+<section id="making-the-data-easier-to-visualize-my-version" class="level3">
+<h3 class="anchored" data-anchor-id="making-the-data-easier-to-visualize-my-version">Making the data easier to visualize (my version)…</h3>
+<p>Simplified the visual into a bar chart to align the information along a common axis and make each cat easier to compare.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Projects_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="288"></p>
+</div>
+</div>
+</section>
 </section>
 <section id="project-2" class="level2">
 <h2 class="anchored" data-anchor-id="project-2">Project 2:</h2>
@@ -211,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="understanding-most-frequently-used-regional-descriptors">Understanding most frequently used regional descriptors…</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Projects_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="960"></p>
+<p><img src="Projects_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
 </section>
@@ -300,7 +320,7 @@ Balanced Accuracy              0.577164        0.538158        0.7971</code></pr
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fit, <span class="at">metric=</span><span class="st">"Kappa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Projects_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="Projects_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
