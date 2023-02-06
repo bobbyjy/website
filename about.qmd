@@ -1,7 +1,7 @@
 ---
 title: "Corey Cassell"
 about:
-  template: trestles
+  template: marquee
   image: elephant.jpg
 ---
 
