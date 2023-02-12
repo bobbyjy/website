@@ -121,6 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<link href="site_libs/tabwid-1.1.2/tabwid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -180,6 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#how-does-the-model-perform-across-provinces" id="toc-how-does-the-model-perform-across-provinces" class="nav-link" data-scroll-target="#how-does-the-model-perform-across-provinces">How does the model perform across provinces?</a></li>
   <li><a href="#which-k-value-is-ideal" id="toc-which-k-value-is-ideal" class="nav-link" data-scroll-target="#which-k-value-is-ideal">Which K value is ideal?</a></li>
   </ul></li>
+  <li><a href="#project-3-using-tables" id="toc-project-3-using-tables" class="nav-link" data-scroll-target="#project-3-using-tables">Project 3: Using Tables</a></li>
   </ul>
 </nav>
     </div>
@@ -218,6 +220,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="making-the-data-easier-to-visualize-my-version">Making the data easier to visualize (my version)…</h3>
 <p>Simplified the visual into a bar chart to align the information along a common axis and make each cat easier to compare.</p>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(distance, <span class="fu">reorder</span>(name,distance), <span class="at">fill =</span> distance))<span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data=</span>(df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name<span class="sc">==</span><span class="st">"Dexter2-Tag"</span>)),<span class="fu">aes</span>(distance,name),<span class="at">fill=</span><span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data=</span>(df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name<span class="sc">==</span><span class="st">"Neva-Tag"</span>)),<span class="fu">aes</span>(distance,name),<span class="at">fill=</span><span class="st">"green"</span>)<span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">3</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">6</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"snow1"</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"snow1"</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">'none'</span>)<span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cat Distances Traveled!"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Cat Names"</span>, <span class="at">x =</span> <span class="st">"Distance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="Projects_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="288"></p>
 </div>
@@ -230,60 +249,283 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="understanding-most-frequently-used-regional-descriptors" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-most-frequently-used-regional-descriptors">Understanding most frequently used regional descriptors…</h3>
 <div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tm")</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm) <span class="co">#for reading in text documents</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidytext")</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext) <span class="co"># for cleaning text and sentiments</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("topicmodels")</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels) <span class="co"># for topic analysis</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("janeaustenr")</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janeaustenr) <span class="co"># for free data</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for data manipulation</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># for manipulating string/text data</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for pretty graphs</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("wordcloud")</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud) <span class="co">#duh</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("stopwords")</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stopwords)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(formatR)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moderndive)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastDummies)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>wine <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot.rds"</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># wine %&gt;% </span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(province) %&gt;% </span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   distinct()</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Oregon                </span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># California                </span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Burgundy              </span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Marlborough               </span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Casablanca_Valley             </span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># New_York</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>OrWine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">"Oregon"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(description)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>CaWine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">"California"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(description)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>BurWine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">"Burgundy"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(description) </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>MarWine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">"Marlborough"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(description)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>CasWine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">"Casablanca_Valley"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(description)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>NewYWine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> <span class="fu">filter</span>(province <span class="sc">==</span> <span class="st">"New_York"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(description)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>OR <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">txt=</span>OrWine<span class="sc">$</span>description)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>CA <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">txtCA=</span>CaWine<span class="sc">$</span>description)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>BU <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">txtBU=</span>BurWine<span class="sc">$</span>description)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>MA <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">txtMA=</span>MarWine<span class="sc">$</span>description)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>CAS <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">txtCAS=</span>CasWine<span class="sc">$</span>description)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>NY <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">txtNY=</span>NewYWine<span class="sc">$</span>description)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>OR<span class="ot">&lt;-</span>OR <span class="sc">%&gt;%</span> </span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word,txt)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>CA<span class="ot">&lt;-</span>CA <span class="sc">%&gt;%</span> </span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word,txtCA)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>BU<span class="ot">&lt;-</span>BU <span class="sc">%&gt;%</span> </span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word,txtBU)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>MA<span class="ot">&lt;-</span>MA <span class="sc">%&gt;%</span> </span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word,txtMA)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>CAS<span class="ot">&lt;-</span>CAS <span class="sc">%&gt;%</span> </span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word,txtCAS)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>NY<span class="ot">&lt;-</span>NY <span class="sc">%&gt;%</span> </span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word,txtNY)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>cleaned_OR <span class="ot">&lt;-</span> OR <span class="sc">%&gt;%</span> </span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>cleaned_CA <span class="ot">&lt;-</span> CA <span class="sc">%&gt;%</span> </span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>cleaned_BU <span class="ot">&lt;-</span> BU <span class="sc">%&gt;%</span> </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>cleaned_MA <span class="ot">&lt;-</span> MA <span class="sc">%&gt;%</span> </span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>cleaned_CAS <span class="ot">&lt;-</span> CAS <span class="sc">%&gt;%</span> </span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>cleaned_NY <span class="ot">&lt;-</span> NY <span class="sc">%&gt;%</span> </span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>cleaned_OR <span class="ot">&lt;-</span> cleaned_OR <span class="sc">%&gt;%</span> </span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(word, <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">400</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>cleaned_CA <span class="ot">&lt;-</span> cleaned_CA <span class="sc">%&gt;%</span> </span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(word, <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">400</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>cleaned_BU <span class="ot">&lt;-</span> cleaned_BU <span class="sc">%&gt;%</span> </span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(word, <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">400</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>cleaned_MA <span class="ot">&lt;-</span> cleaned_MA <span class="sc">%&gt;%</span> </span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(word, <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>cleaned_CAS <span class="ot">&lt;-</span> cleaned_CAS <span class="sc">%&gt;%</span> </span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(word, <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>cleaned_NY <span class="ot">&lt;-</span> cleaned_NY <span class="sc">%&gt;%</span> </span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(word, <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n<span class="sc">&gt;</span><span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span>cleaned_OR <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word,n), n, <span class="at">fill =</span> n))<span class="sc">+</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Oregon Word Descriptors over 400 Occurences"</span>)<span class="sc">+</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>  <span class="co">#CoreyPlotTheme+</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>))</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>b<span class="ot">&lt;-</span>cleaned_CA <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word,n), n, <span class="at">fill =</span> n))<span class="sc">+</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"California Word Descriptors over 400 Occurences"</span>)<span class="sc">+</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  <span class="co">#CoreyPlotTheme+</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>))</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>c<span class="ot">&lt;-</span>cleaned_BU <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word,n), n, <span class="at">fill =</span> n))<span class="sc">+</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Burgondy? Word Descriptors over 400 Occurences"</span>)<span class="sc">+</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  <span class="co">#CoreyPlotTheme+</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>))</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>d<span class="ot">&lt;-</span>cleaned_MA <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word,n), n, <span class="at">fill =</span> n))<span class="sc">+</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Malboro? Word Descriptors over 50 Occurences"</span>)<span class="sc">+</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>  <span class="co">#CoreyPlotTheme+</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>))</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span>cleaned_CAS <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word,n), n, <span class="at">fill =</span> n))<span class="sc">+</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Casa-whatever Word Descriptors over 50 Occurences"</span>)<span class="sc">+</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>  <span class="co">#CoreyPlotTheme+</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>))</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>f<span class="ot">&lt;-</span>cleaned_NY <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word,n), n, <span class="at">fill =</span> n))<span class="sc">+</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"New York Word Descriptors over 50 Occurences"</span>)<span class="sc">+</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>  <span class="co">#CoreyPlotTheme+</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>))</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(<span class="fu">arrangeGrob</span>(a,b,c,<span class="at">ncol=</span><span class="dv">3</span>), <span class="fu">arrangeGrob</span>(d,e,f,<span class="at">ncol=</span><span class="dv">3</span>), <span class="at">nrow=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="Projects_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="960"></p>
 </div>
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>chocolate <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'chocolate'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>black <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'black'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>oak <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'oak'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>tart <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'tart'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>oregon <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'oregon'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>aroma <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'aroma'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>palate <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'palate'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>bottling <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'bottling'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>spice <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'spice'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>california <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'california'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>ripe <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'ripe'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>tannin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'tannin'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>drink <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'drink'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>burgundy <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'burgundy'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>medium <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'medium'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>noir <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'noir'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>) <span class="co"># marlborlal..ish?</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>note <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'note'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>now <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'now'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>marlborough <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'marlborough'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>plum <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'plum'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>finish <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'finish'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>flavor <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'flavor'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>casa <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'casablanca'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>newyork <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'new york'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>cola <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'cola'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>forward <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'forward'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>estate <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'estate'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>spicy <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'spicy'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>herb <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'herb'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>french <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'french'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>elegant <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'elegant'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>earth <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'earth'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>acidity <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'acidity'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>raspberry <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'raspberry'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#^just these factors make a .5!</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>structure <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'structure'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>wood <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'wood'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>aging <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'aging'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>soft <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'soft'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>firm <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'firm'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#^just these factors make a .53</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>supple <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'supple'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>long <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'long'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>crisp <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'crisp'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>dusty <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'dusty'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>cuv <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'cuvée'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>core <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'core'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>leaf <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'leaf'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>rich <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'rich'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>wine<span class="sc">$</span>months <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(wine<span class="sc">$</span>description, <span class="fu">regex</span>(<span class="st">'months'</span>, <span class="at">ignore_case =</span> T)),<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co">#.547^</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>wine <span class="ot">&lt;-</span> wine <span class="sc">%&gt;%</span> </span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">points =</span> <span class="fu">scale</span>(points, <span class="at">center =</span> T, <span class="at">scale =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">price =</span> <span class="fu">scale</span>(<span class="fu">log</span>(price), <span class="at">center =</span> T, <span class="at">scale =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id,<span class="sc">-</span>description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="how-does-the-model-perform-across-provinces" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-the-model-perform-across-provinces">How does the model perform across provinces?</h3>
 <p>Accuracy is very high for Burgundy, California, and Oregon regions. Smaller regions performed substantially worse, potentially due to significantly lower availability of data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PROJECT 1 Feature Engineering</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">504</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>wine_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(wine<span class="sc">$</span>province, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> wine[ wine_index, ]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> wine[<span class="sc">-</span>wine_index, ]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#10 fold cross validation</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">"repeatedcv"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">5</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">repeats =</span> <span class="dv">3</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           )</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(province <span class="sc">~</span> .,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"knn"</span>,<span class="co">#knn</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">20</span>, <span class="co">#the 30 different values for K</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"Kappa"</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> control)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>province))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PROJECT 1 Feature Engineering</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">504</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>wine_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(wine<span class="sc">$</span>province, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> wine[ wine_index, ]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> wine[<span class="sc">-</span>wine_index, ]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#10 fold cross validation</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">"repeatedcv"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">number =</span> <span class="dv">3</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                           )</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(province <span class="sc">~</span> .,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> train, </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">method =</span> <span class="st">"knn"</span>,<span class="co">#knn</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">tuneLength =</span> <span class="dv">20</span>, <span class="co">#the 30 different values for K</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">"Kappa"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">trControl =</span> control)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">predict</span>(fit, test),<span class="fu">factor</span>(test<span class="sc">$</span>province))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
                    Reference
 Prediction          Burgundy California Casablanca_Valley Marlborough New_York
-  Burgundy               214          7                 0           4        2
-  California               4        699                 7          16       10
+  Burgundy               213          8                 0           3        2
+  California               5        689                 9          15        8
   Casablanca_Valley        0          0                 8           0        1
-  Marlborough              0          1                 0           7        1
-  New_York                 0          0                 0           1        2
-  Oregon                  20         84                11          17       10
+  Marlborough              0          1                 0          10        0
+  New_York                 0          0                 0           1        4
+  Oregon                  20         93                 9          16       11
                    Reference
 Prediction          Oregon
   Burgundy              16
-  California           136
+  California           131
   Casablanca_Valley      1
   Marlborough            0
   New_York               0
-  Oregon               394
+  Oregon               399
 
 Overall Statistics
                                           
-               Accuracy : 0.7914          
-                 95% CI : (0.7711, 0.8106)
+               Accuracy : 0.7908          
+                 95% CI : (0.7705, 0.8101)
     No Information Rate : 0.4728          
     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
                                           
@@ -294,23 +536,23 @@ Overall Statistics
 Statistics by Class:
 
                      Class: Burgundy Class: California Class: Casablanca_Valley
-Sensitivity                   0.8992            0.8837                 0.307692
-Specificity                   0.9798            0.8039                 0.998786
-Pos Pred Value                0.8807            0.8016                 0.800000
-Neg Pred Value                0.9832            0.8851                 0.989176
+Sensitivity                   0.8950            0.8710                 0.307692
+Specificity                   0.9798            0.8095                 0.998786
+Pos Pred Value                0.8802            0.8040                 0.800000
+Neg Pred Value                0.9825            0.8750                 0.989176
 Prevalence                    0.1423            0.4728                 0.015541
-Detection Rate                0.1279            0.4178                 0.004782
-Detection Prevalence          0.1452            0.5212                 0.005977
-Balanced Accuracy             0.9395            0.8438                 0.653239
+Detection Rate                0.1273            0.4118                 0.004782
+Detection Prevalence          0.1447            0.5123                 0.005977
+Balanced Accuracy             0.9374            0.8403                 0.653239
                      Class: Marlborough Class: New_York Class: Oregon
-Sensitivity                    0.155556        0.076923        0.7203
-Specificity                    0.998771        0.999393        0.8739
-Pos Pred Value                 0.777778        0.666667        0.7351
-Neg Pred Value                 0.977163        0.985629        0.8654
+Sensitivity                    0.222222        0.153846        0.7294
+Specificity                    0.999386        0.999393        0.8677
+Pos Pred Value                 0.909091        0.800000        0.7281
+Neg Pred Value                 0.978941        0.986811        0.8684
 Prevalence                     0.026898        0.015541        0.3270
-Detection Rate                 0.004184        0.001195        0.2355
-Detection Prevalence           0.005380        0.001793        0.3204
-Balanced Accuracy              0.577164        0.538158        0.7971</code></pre>
+Detection Rate                 0.005977        0.002391        0.2385
+Detection Prevalence           0.006575        0.002989        0.3276
+Balanced Accuracy              0.610804        0.576619        0.7986</code></pre>
 </div>
 </div>
 </section>
@@ -318,14 +560,132 @@ Balanced Accuracy              0.577164        0.538158        0.7971</code></pr
 <h3 class="anchored" data-anchor-id="which-k-value-is-ideal">Which K value is ideal?</h3>
 <p>This graphs kappa performance of the model over a range of K values. Kappa is a measure of model performance against random chance classification. We want to achieve the highest kappa value possible.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fit, <span class="at">metric=</span><span class="st">"Kappa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fit, <span class="at">metric=</span><span class="st">"Kappa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="Projects_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="project-3-using-tables" class="level2">
+<h2 class="anchored" data-anchor-id="project-3-using-tables">Project 3: Using Tables</h2>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)<span class="co"># a change</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reReg)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(KMsurv)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ecdat)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This is a study of Natural vs Anthropogenic soils for</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data repo: https://github.com/bobbyjy/MyData</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#load dataset into git repo</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>thePath<span class="ot">=</span><span class="st">"https://raw.githubusercontent.com/bobbyjy/MyData/main/"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#update with file name for project 1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Anth<span class="ot">=</span><span class="fu">read_csv</span>(<span class="fu">paste</span>(thePath,<span class="st">"Anthropogenic.csv"</span>,<span class="at">sep=</span><span class="st">"/"</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#load dataset into git repo</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>thePath<span class="ot">=</span><span class="st">"https://raw.githubusercontent.com/bobbyjy/MyData/main/"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#update with file name for project 1</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>Nat<span class="ot">=</span><span class="fu">read_csv</span>(<span class="fu">paste</span>(thePath,<span class="st">"Natural.csv"</span>,<span class="at">sep=</span><span class="st">"/"</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Anth<span class="ot">&lt;-</span>Anth <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">anthro=</span><span class="dv">1</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>Nat<span class="ot">&lt;-</span>Nat <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">anthro=</span><span class="dv">0</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>coraldf <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">combine</span>(Anth,Nat)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#comparing temperature and survival</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> coraldf <span class="sc">%&gt;%</span> <span class="fu">select</span>(Temperature, Time, Status)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>km.Temp <span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(Temp<span class="sc">$</span>Time,Temp<span class="sc">$</span>Status)<span class="sc">~</span>Temp<span class="sc">$</span>Temperature)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggsurvplot</span>(<span class="at">fit=</span>km.Temp, <span class="at">data=</span>Temp,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend =</span> <span class="st">"bottom"</span>, <span class="at">risk.table =</span> F,<span class="at">conf.int=</span>F, <span class="at">legend.title =</span> <span class="st">"Study Temperatures: "</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">"Visualizing the Impact of Global Warming on Coral Populations"</span>,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">subtitle =</span> <span class="st">"Observing Coral Survival in 26C and 30C Groups"</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">x=</span><span class="st">"Time Until Coral Death (Weeks)"</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(Temp<span class="sc">$</span>Time,Temp<span class="sc">$</span>Status)<span class="sc">~</span>Temp<span class="sc">$</span>Temperature)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(Temp$Time, Temp$Status) ~ Temp$Temperature)
+
+                      N Observed Expected (O-E)^2/E (O-E)^2/V
+Temp$Temperature=26 646      572      751      42.9       167
+Temp$Temperature=30 610      607      428      75.3       167
+
+ Chisq= 167  on 1 degrees of freedom, p= &lt;2e-16 </code></pre>
+</div>
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km.Temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(Temp$Time, Temp$Status) ~ Temp$Temperature)
+
+                Temp$Temperature=26 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1    646     137    0.788  0.0161       0.7570        0.820
+    2    509      63    0.690  0.0182       0.6557        0.727
+    3    446      56    0.604  0.0192       0.5672        0.643
+    4    390      80    0.480  0.0197       0.4429        0.520
+    5    310      55    0.395  0.0192       0.3588        0.434
+    6    246      56    0.305  0.0182       0.2712        0.343
+    7    190      31    0.255  0.0173       0.2234        0.291
+    8    159      25    0.215  0.0163       0.1853        0.250
+    9    134      23    0.178  0.0152       0.1506        0.211
+   10    111      10    0.162  0.0147       0.1357        0.194
+   11    101      23    0.125  0.0132       0.1018        0.154
+   12     78      13    0.104  0.0122       0.0829        0.131
+
+                Temp$Temperature=30 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1    610     210  0.65574 0.01924      0.61910       0.6945
+    2    400      85  0.51639 0.02023      0.47822       0.5576
+    3    315     115  0.32787 0.01901      0.29265       0.3673
+    4    200      85  0.18852 0.01584      0.15991       0.2223
+    5    115      38  0.12623 0.01345      0.10244       0.1555
+    6     77      32  0.07377 0.01058      0.05569       0.0977
+    7     45      22  0.03770 0.00771      0.02525       0.0563
+    8     23       7  0.02623 0.00647      0.01617       0.0425
+    9     16       5  0.01803 0.00539      0.01004       0.0324
+   10     11       3  0.01311 0.00461      0.00659       0.0261
+   11      8       4  0.00656 0.00327      0.00247       0.0174
+   12      4       1  0.00492 0.00283      0.00159       0.0152</code></pre>
+</div>
+</div>
+<p>###Showing The Data:</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable); <span class="fu">library</span>(tidyverse); <span class="fu">library</span>(webshot2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_df_printer</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Bonds <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/bobbyjy/MyData/main/Anthropogenic.csv"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Bonds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-73eb446e{}.cl-73e0f428{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-73e0f43c{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-73e5087e{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-73e50892{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-73e525ca{width:1.16in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525d4{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525d5{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525de{width:1.16in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525e8{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525e9{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525ea{width:1.16in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525fc{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525fd{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e525fe{width:1.16in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e52606{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e52607{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e52610{width:1.16in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e52611{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-73e5261a{width:0.829in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-73eb446e"><thead><tr style="overflow-wrap:break-word;"><th class="cl-73e525ca"><p class="cl-73e5087e"><span class="cl-73e0f428">Temperature</span></p></th><th class="cl-73e525d4"><p class="cl-73e5087e"><span class="cl-73e0f428">Sediment</span></p></th><th class="cl-73e525d5"><p class="cl-73e5087e"><span class="cl-73e0f428">Time</span></p></th><th class="cl-73e525d5"><p class="cl-73e5087e"><span class="cl-73e0f428">Status</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-73e525de"><p class="cl-73e5087e"><span class="cl-73e0f43c">numeric</span></p></th><th class="cl-73e525e8"><p class="cl-73e5087e"><span class="cl-73e0f43c">numeric</span></p></th><th class="cl-73e525e9"><p class="cl-73e5087e"><span class="cl-73e0f43c">numeric</span></p></th><th class="cl-73e525e9"><p class="cl-73e5087e"><span class="cl-73e0f43c">numeric</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">1</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">3</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525ea"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e525fc"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e525fd"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-73e525fe"><p class="cl-73e5087e"><span class="cl-73e0f428">26</span></p></td><td class="cl-73e52606"><p class="cl-73e5087e"><span class="cl-73e0f428">30</span></p></td><td class="cl-73e52607"><p class="cl-73e5087e"><span class="cl-73e0f428">5</span></p></td><td class="cl-73e52607"><p class="cl-73e5087e"><span class="cl-73e0f428">0</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="4" class="cl-73e52610"><p class="cl-73e50892"><span class="cl-73e0f428">n: 80</span></p></td></tr></tfoot></table></div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

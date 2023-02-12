@@ -107,7 +107,10 @@ df %>%
 ```
 ### Making the data easier to visualize (my version)...
 Simplified the visual into a bar chart to align the information along a common axis and make each cat easier to compare. 
-```{r,fig.height=7, fig.width = 3, message=FALSE, echo=FALSE, warning=FALSE}
+```{r,fig.height=7, fig.width = 3}
+#| code-fold: true
+#| code-summary: "Show the code"
+#
 df %>% 
   ggplot(aes(distance, reorder(name,distance), fill = distance))+
   geom_col()+
@@ -129,7 +132,9 @@ An example of a KNN model that we are building and improving in class. The objec
 
 ### Understanding most frequently used regional descriptors...
 
-```{r, echo=FALSE,message=FALSE, warning=FALSE, fig.height = 10, fig.width=10}
+```{r,message=FALSE, warning=FALSE, fig.height = 10, fig.width=10}
+#| code-fold: true
+#| code-summary: "Show the code"
 #install.packages("tm")
 library(tm) #for reading in text documents
 #install.packages("tidytext")
@@ -353,7 +358,9 @@ wine <- wine %>%
 ### How does the model perform across provinces?
 Accuracy is very high for Burgundy, California, and Oregon regions. Smaller regions performed substantially worse, potentially due to significantly lower availability of data. 
 
-```{r, fig.width=10}
+```{r, fig.width=10, message=FALSE,warning=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
 #PROJECT 1 Feature Engineering
 set.seed(504)
 wine_index <- createDataPartition(wine$province, p = 0.8, list = FALSE)
@@ -363,8 +370,7 @@ test <- wine[-wine_index, ]
 #10 fold cross validation
 control <- trainControl(
                            method = "repeatedcv",
-                           number = 5,
-                           repeats = 3
+                           number = 3
                            )
 
 fit <- train(province ~ .,
@@ -379,6 +385,75 @@ confusionMatrix(predict(fit, test),factor(test$province))
 
 ### Which K value is ideal?
 This graphs kappa performance of the model over a range of K values. Kappa is a measure of model performance against random chance classification. We want to achieve the highest kappa value possible. 
-```{r}
+```{r,warning=FALSE,message=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
 ggplot(fit, metric="Kappa")
 ```
+## Project 3: Using Tables
+
+```{r, warning=FALSE,message=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(skimr)
+library(survival)# a change
+library(survminer)
+library(reReg)
+library(KMsurv)
+library(Ecdat)
+library(ggplot2)
+```
+This is a study of Natural vs Anthropogenic soils for 
+
+```{r, warning=FALSE,message=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+#data repo: https://github.com/bobbyjy/MyData
+
+#load dataset into git repo
+thePath="https://raw.githubusercontent.com/bobbyjy/MyData/main/"
+
+#update with file name for project 1
+Anth=read_csv(paste(thePath,"Anthropogenic.csv",sep="/"))
+
+#load dataset into git repo
+thePath="https://raw.githubusercontent.com/bobbyjy/MyData/main/"
+
+#update with file name for project 1
+Nat=read_csv(paste(thePath,"Natural.csv",sep="/"))
+
+Anth<-Anth %>% mutate(anthro=1)
+Nat<-Nat %>% mutate(anthro=0)
+coraldf <- dplyr::combine(Anth,Nat)
+
+#comparing temperature and survival
+Temp <- coraldf %>% select(Temperature, Time, Status)
+km.Temp =survfit(Surv(Temp$Time,Temp$Status)~Temp$Temperature)
+
+p <- ggsurvplot(fit=km.Temp, data=Temp,
+           legend = "bottom", risk.table = F,conf.int=F, legend.title = "Study Temperatures: ") +
+    labs(
+        title="Visualizing the Impact of Global Warming on Coral Populations",
+        subtitle = "Observing Coral Survival in 26C and 30C Groups",
+        x="Time Until Coral Death (Weeks)"
+    ) 
+survdiff(Surv(Temp$Time,Temp$Status)~Temp$Temperature)
+
+summary(km.Temp)
+
+```
+###Showing The Data (using Flextable!):
+```{r, warning=FALSE,message=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+
+library(flextable); library(tidyverse); library(webshot2)
+use_df_printer()
+Bonds <- read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/Anthropogenic.csv")
+Bonds
+```
+
