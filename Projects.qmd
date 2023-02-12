@@ -445,7 +445,7 @@ survdiff(Surv(Temp$Time,Temp$Status)~Temp$Temperature)
 summary(km.Temp)
 
 ```
-###Showing The Data (using Flextable!):
+### Showing The Data (using Flextable!):
 ```{r, warning=FALSE,message=FALSE}
 #| code-fold: true
 #| code-summary: "Show the code"
@@ -456,4 +456,14 @@ use_df_printer()
 Bonds <- read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/Anthropogenic.csv")
 Bonds
 ```
+### Showing The Data (using DT!):
+```{r, warning=FALSE,message=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+library(DT)
+#install.packages("DT")
+items <- readr::read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/Natural.csv")
+datatable(head(items))
+```
+
 
