@@ -132,9 +132,7 @@ An example of a KNN model that we are building and improving in class. The objec
 
 ### Understanding most frequently used regional descriptors...
 
-```{r,message=FALSE, warning=FALSE, fig.height = 10, fig.width=10}
-#| code-fold: true
-#| code-summary: "Show the code"
+```{r, echo=FALSE,message=FALSE, warning=FALSE, fig.height = 10, fig.width=10}
 #install.packages("tm")
 library(tm) #for reading in text documents
 #install.packages("tidytext")
@@ -358,9 +356,7 @@ wine <- wine %>%
 ### How does the model perform across provinces?
 Accuracy is very high for Burgundy, California, and Oregon regions. Smaller regions performed substantially worse, potentially due to significantly lower availability of data. 
 
-```{r, fig.width=10, message=FALSE,warning=FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
+```{r, fig.width=10}
 #PROJECT 1 Feature Engineering
 set.seed(504)
 wine_index <- createDataPartition(wine$province, p = 0.8, list = FALSE)
@@ -385,16 +381,12 @@ confusionMatrix(predict(fit, test),factor(test$province))
 
 ### Which K value is ideal?
 This graphs kappa performance of the model over a range of K values. Kappa is a measure of model performance against random chance classification. We want to achieve the highest kappa value possible. 
-```{r,warning=FALSE,message=FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
+```{r}
 ggplot(fit, metric="Kappa")
 ```
 ## Project 3: Using Tables
 
-```{r, warning=FALSE,message=FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
@@ -404,13 +396,10 @@ library(survminer)
 library(reReg)
 library(KMsurv)
 library(Ecdat)
-library(ggplot2)
 ```
 This is a study of Natural vs Anthropogenic soils for 
 
-```{r, warning=FALSE,message=FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
+```{r}
 #data repo: https://github.com/bobbyjy/MyData
 
 #load dataset into git repo
@@ -429,6 +418,8 @@ Anth<-Anth %>% mutate(anthro=1)
 Nat<-Nat %>% mutate(anthro=0)
 coraldf <- dplyr::combine(Anth,Nat)
 
+```
+```{r}
 #comparing temperature and survival
 Temp <- coraldf %>% select(Temperature, Time, Status)
 km.Temp =survfit(Surv(Temp$Time,Temp$Status)~Temp$Temperature)
@@ -440,30 +431,30 @@ p <- ggsurvplot(fit=km.Temp, data=Temp,
         subtitle = "Observing Coral Survival in 26C and 30C Groups",
         x="Time Until Coral Death (Weeks)"
     ) 
+
+p$plot + scale_colour_manual(values = c("turquoise1", "red"))+
+  theme(panel.background = element_rect(fill = "grey12"),
+        plot.background = element_rect(fill="grey12"),
+        axis.text.x=element_text(colour="white"),
+        axis.text.y=element_text(colour="white"),
+        plot.title = element_text(colour = "white"),
+        axis.title.x = element_text(colour = "white"),
+        axis.title.y = element_text(colour = "white"),
+        axis.line.x = element_line(color="white"),
+        axis.line.y = element_line(color="white"),
+        legend.key = element_rect(fill = "grey12"),
+        legend.background = element_rect(fill="grey12"),
+        legend.text = element_text(color = "white"),
+        legend.title = element_text(color = "white"),
+        plot.subtitle = element_text(color="white"))+
+   annotate("text", x = 2, y = .25, label = "30C Group", color = "red", fontface = "bold")+
+  annotate("text", x = 6, y = .65, label = "26C Group", color = "turquoise1", fontface = "bold")
+
+#add annotation labels for the temp groups
+#fix legend background
+# setwd("C:\\Users\\corey\\OneDrive\\Documents\\GitHub\\599_Project1")
+# ggsave("GlobalWarmingImpact.png", dpi = 300)
+
 survdiff(Surv(Temp$Time,Temp$Status)~Temp$Temperature)
 
 summary(km.Temp)
-
-```
-### Showing The Data (using Flextable!):
-```{r, warning=FALSE,message=FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
-
-
-library(flextable); library(tidyverse); library(webshot2)
-use_df_printer()
-Bonds <- read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/Anthropogenic.csv")
-Bonds
-```
-### Showing The Data (using DT!):
-```{r, warning=FALSE,message=FALSE}
-#| code-fold: true
-#| code-summary: "Show the code"
-library(DT)
-#install.packages("DT")
-items <- readr::read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/Natural.csv")
-datatable(head(items))
-```
-
-

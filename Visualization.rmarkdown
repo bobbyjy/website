@@ -1,0 +1,59 @@
+---
+title: "Visualization"
+---
+
+
+My portfolio! I'll be storing examples of my work and skillset in this location.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(lubridate)
+library(skimr)
+library(survival)
+library(survminer)
+library(reReg)
+library(KMsurv)
+library(Ecdat)
+
+ds<-read.csv("https://raw.githubusercontent.com/bobbyjy/website/main/pharmacoSmoking-asaur.txt",
+                    header=TRUE)
+
+# thePath="C:\\Users\\corey\\OneDrive\\Desktop\\01_Willamette U\\Semester 1\\599\\Week3\\"
+# 
+# ds=read_csv(paste(thePath,"pharmacoSmoking-asaur.txt",sep="\\"))
+
+ds=ds %>%
+    select(id,grp,ttr,relapse)
+
+kmnostrata=survfit(Surv(ds$ttr,ds$relapse)~1) #no strata
+summary(kmnostrata)
+
+
+km=survfit(Surv(ds$ttr,ds$relapse)~ds$grp)
+
+ggsurvplot(fit=km, data=ds,
+           legend = "bottom", 
+           legend.title = "Treatment Group",
+           legend.labs = c("Combination", "Patch Only"),
+risk.table = F,conf.int=T) +
+    labs(
+        title="Survival Curve for Pharmaco Study",
+        x="Time to Relapse)"
+    ) 
+```
+
+```{r}
+ggsurvplot(fit=km, data=ds,
+           legend = "bottom", 
+           legend.title = "Treatment Group",
+           legend.labs = c("Combination", "Patch Only"),
+risk.table = F,conf.int=T) +
+    labs(
+        title="Survival Curve for Pharmaco Study",
+        x="Time to Relapse)"
+    ) 
+```
+
