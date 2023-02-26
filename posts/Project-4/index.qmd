@@ -1,0 +1,58 @@
+---
+title: "Presentation"
+image: "IMG_5192.JPG"
+---
+
+## Project 3: Using Tables
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(skimr)
+library(survival)# a change
+library(survminer)
+library(reReg)
+library(KMsurv)
+library(Ecdat)
+#install.packages("plotly")
+library(plotly)
+library(DT)
+```
+
+## Plot 1 (Using ggiraph)
+```{r, message=FALSE,warning=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+ds1 <- read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/job_retention-hopa.txt")
+
+datatable(head(ds1))
+```
+
+## Plot 2 (Using Plotly)
+```{r, message=FALSE,warning=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+ds2 <- read_rds("https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot_orig.rds")
+
+datatable(head(ds2, n = 3))
+
+a<-ds2 %>% 
+  ggplot(aes(price,points, text = paste("tasted by: ", taster_name,
+                                        "<br>",
+                                         "description: ", description), color = points))+
+  geom_point(show.legend = FALSE)+
+  theme_bw()+
+  labs(title = "Wine Price vs. Rating", x = "Rating", y = "Price")
+
+
+ggp <- ggplotly(a)
+
+ggp %>% layout(hovermode = "closest")
+```
+
+### Price vs. Rating
+```{r}
+
+```
+
