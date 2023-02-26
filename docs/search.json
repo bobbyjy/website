@@ -86,44 +86,44 @@
   {
     "objectID": "posts/Project-3/index.html#plot1",
     "href": "posts/Project-3/index.html#plot1",
-    "title": "Interactive Plots",
+    "title": "Presentation",
     "section": "plot1!!!!",
     "text": "plot1!!!!\n\n\nShow the code\nds1 <- read_csv(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/job_retention-hopa.txt\")\n\nds1\n\n\n# A tibble: 3,770 × 7\n   gender field                  level  sentiment intention  left month\n   <chr>  <chr>                  <chr>      <dbl>     <dbl> <dbl> <dbl>\n 1 M      Public/Government      High           3         8     1     1\n 2 F      Finance                Low            8         4     0    12\n 3 M      Education and Training Medium         7         7     1     5\n 4 M      Finance                Low            8         4     0    12\n 5 M      Finance                High           7         6     1     1\n 6 F      Health                 Medium         6        10     1     2\n 7 M      Education and Training Medium         8         2     0    12\n 8 M      Finance                Low            7         9     0    12\n 9 M      Public/Government      High           7         6     1     5\n10 M      Law                    Low            7         4     0    12\n# … with 3,760 more rows"
   },
   {
     "objectID": "posts/Project-3/index.html#plot2",
     "href": "posts/Project-3/index.html#plot2",
-    "title": "Interactive Plots",
+    "title": "Presentation",
     "section": "plot2!!!!",
     "text": "plot2!!!!\n\n\nShow the code\nds2 <- read_rds(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot.rds\")\n\na<-ds2 %>% \n  ggplot(aes(price,points))+\n  geom_point()\n\nggplotly(a)"
   },
   {
     "objectID": "posts/Project-4/index.html",
     "href": "posts/Project-4/index.html",
-    "title": "Presentation",
+    "title": "Interactive Plots",
     "section": "",
     "text": "Show the code\nds2 <- read_rds(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot_orig.rds\")\ndatatable(head(ds2))"
   },
   {
     "objectID": "posts/Project-4/index.html#plot-1-using-ggiraph",
     "href": "posts/Project-4/index.html#plot-1-using-ggiraph",
-    "title": "Presentation",
+    "title": "Interactive Plots",
     "section": "Plot 1 (Using ggiraph)",
     "text": "Plot 1 (Using ggiraph)\n\n\nShow the code\ngg <- ds2 %>% \n  select(taster_name) %>% \n  group_by(taster_name) %>% \n  summarise(taster_name, reviews = n()) %>% \n  distinct() %>% \n  arrange(reviews) %>% \n  ggplot(aes(reviews,reorder(taster_name,reviews), fill = taster_name))+\n  #geom_col()+\n  geom_col_interactive(aes(tooltip = taster_name, data_id = taster_name), show.legend = FALSE)+\n  scale_fill_viridis_d()+\n  labs(title = \"Which tasters have tasted the most?\")\n\nx <- girafe(ggobj = gg, width_svg = 8, height_svg = 6,\n            options = list(\n              opts_hover_inv(css = \"opacity:0.1;\"),\n              opts_hover(css= \"stroke-width:2;\")\n            ))\n\nx"
   },
   {
     "objectID": "posts/Project-4/index.html#plot-2-using-plotly",
     "href": "posts/Project-4/index.html#plot-2-using-plotly",
-    "title": "Presentation",
+    "title": "Interactive Plots",
     "section": "Plot 2 (Using Plotly)",
-    "text": "Plot 2 (Using Plotly)\n\n\nShow the code\na<-ds2 %>% \n  ggplot(aes(price,points, text = paste(\"tasted by: \", taster_name,\n                                        \"<br>\",\n                                         \"description: \", description), color = points))+\n  geom_point(show.legend = FALSE)+\n  theme_bw()+\n  labs(title = \"Wine Price vs. Rating\", x = \"Rating\", y = \"Price\")\n\n\nggp <- ggplotly(a)\n\nggp %>% layout(hovermode = \"closest\")\n\n\n\n\n\n\n\n\nPrice vs. Rating"
+    "text": "Plot 2 (Using Plotly)\n\n\nShow the code\na<-ds2 %>% \n  ggplot(aes(price,points, text = paste(\"tasted by: \", taster_name,\n                                        \"<br>\",\n                                         \"description: \", description), color = points))+\n  geom_point(show.legend = FALSE)+\n  theme_bw()+\n  labs(title = \"Wine Price vs. Rating\", x = \"Rating\", y = \"Price\")\n\n\nggp <- ggplotly(a)\n\nggp %>% layout(hovermode = \"closest\")"
   },
   {
     "objectID": "Projects2.html",
     "href": "Projects2.html",
     "title": "Some cool things…",
     "section": "",
-    "text": "ProjectsTEST\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTables!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInteractive Plots\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPresentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "ProjectsTEST\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTables!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPresentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInteractive Plots\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Visualization.html",
