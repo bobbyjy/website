@@ -1,5 +1,6 @@
 ---
 title: "Interactive Plots!"
+image: "IMG_5192.JPG"
 ---
 
 ## Project 3: Using Tables

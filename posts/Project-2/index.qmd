@@ -1,5 +1,6 @@
 ---
 title: "Tables!"
+image: "IMG_1326.JPG"
 ---
 
 ## Project 3: Using Tables

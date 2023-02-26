@@ -1,5 +1,6 @@
 ---
 title: "ProjectsTEST"
+image: "IMG_9033.JPG"
 ---
 
 ## Project 2:
