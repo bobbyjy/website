@@ -98,6 +98,27 @@
     "text": "plot2!!!!\n\n\nShow the code\nds2 <- read_rds(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot.rds\")\n\na<-ds2 %>% \n  ggplot(aes(price,points))+\n  geom_point()\n\nggplotly(a)"
   },
   {
+    "objectID": "posts/Project-4/index.html",
+    "href": "posts/Project-4/index.html",
+    "title": "Presentation",
+    "section": "",
+    "text": "Show the code\nds2 <- read_rds(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot_orig.rds\")\ndatatable(head(ds2))"
+  },
+  {
+    "objectID": "posts/Project-4/index.html#plot-1-using-ggiraph",
+    "href": "posts/Project-4/index.html#plot-1-using-ggiraph",
+    "title": "Presentation",
+    "section": "Plot 1 (Using ggiraph)",
+    "text": "Plot 1 (Using ggiraph)\n\n\nShow the code\ngg <- ds2 %>% \n  select(taster_name) %>% \n  group_by(taster_name) %>% \n  summarise(taster_name, reviews = n()) %>% \n  distinct() %>% \n  arrange(reviews) %>% \n  ggplot(aes(reviews,reorder(taster_name,reviews), fill = taster_name))+\n  #geom_col()+\n  geom_col_interactive(aes(tooltip = taster_name, data_id = taster_name), show.legend = FALSE)+\n  scale_fill_viridis_d()+\n  labs(title = \"Which tasters have tasted the most?\")\n\nx <- girafe(ggobj = gg, width_svg = 8, height_svg = 6,\n            options = list(\n              opts_hover_inv(css = \"opacity:0.1;\"),\n              opts_hover(css= \"stroke-width:2;\")\n            ))\n\nx"
+  },
+  {
+    "objectID": "posts/Project-4/index.html#plot-2-using-plotly",
+    "href": "posts/Project-4/index.html#plot-2-using-plotly",
+    "title": "Presentation",
+    "section": "Plot 2 (Using Plotly)",
+    "text": "Plot 2 (Using Plotly)\n\n\nShow the code\na<-ds2 %>% \n  ggplot(aes(price,points, text = paste(\"tasted by: \", taster_name,\n                                        \"<br>\",\n                                         \"description: \", description), color = points))+\n  geom_point(show.legend = FALSE)+\n  theme_bw()+\n  labs(title = \"Wine Price vs. Rating\", x = \"Rating\", y = \"Price\")\n\n\nggp <- ggplotly(a)\n\nggp %>% layout(hovermode = \"closest\")\n\n\n\n\n\n\n\n\nPrice vs. Rating"
+  },
+  {
     "objectID": "Projects2.html",
     "href": "Projects2.html",
     "title": "Some cool things…",
@@ -110,19 +131,5 @@
     "title": "Visualization",
     "section": "",
     "text": "My portfolio! I’ll be storing examples of my work and skillset in this location.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nggsurvplot(fit=km, data=ds,\n           legend = \"bottom\", \n           legend.title = \"Treatment Group\",\n           legend.labs = c(\"Combination\", \"Patch Only\"),\nrisk.table = F,conf.int=T) +\n    labs(\n        title=\"Survival Curve for Pharmaco Study\",\n        x=\"Time to Relapse)\"\n    )"
-  },
-  {
-    "objectID": "posts/Project-4/index.html#plot-1",
-    "href": "posts/Project-4/index.html#plot-1",
-    "title": "Presentation",
-    "section": "Plot 1",
-    "text": "Plot 1\n\n\nShow the code\nds1 <- read_csv(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/job_retention-hopa.txt\")\n\ndatatable(head(ds1))"
-  },
-  {
-    "objectID": "posts/Project-4/index.html#plot-2",
-    "href": "posts/Project-4/index.html#plot-2",
-    "title": "Presentation",
-    "section": "Plot 2",
-    "text": "Plot 2\n\n\nShow the code\nds2 <- read_rds(\"https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot.rds\")\n\ndatatable(head(ds2, n = 3))\n\n\n\n\n\n\n\nShow the code\na<-ds2 %>% \n  ggplot(aes(price,points))+\n  geom_point()\n\nggplotly(a)"
   }
 ]

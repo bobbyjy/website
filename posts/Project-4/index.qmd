@@ -71,8 +71,4 @@ ggp <- ggplotly(a)
 ggp %>% layout(hovermode = "closest")
 ```
 
-### Price vs. Rating
-```{r}
-
-```
 
