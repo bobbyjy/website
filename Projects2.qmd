@@ -1,0 +1,14 @@
+---
+title: "Some cool things..."
+listing:
+  contents: "posts/*/index.qmd"
+  feed: true
+  sort: "date desc"
+  type: grid
+  categories: false
+  sort-ui: false
+  filter-ui: false
+
+page-layout: full
+title-block-banner: true
+---
