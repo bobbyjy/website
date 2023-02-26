@@ -3,8 +3,6 @@ title: "Presentation"
 image: "IMG_5192.JPG"
 ---
 
-## Project 3: Using Tables
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -18,25 +16,47 @@ library(Ecdat)
 #install.packages("plotly")
 library(plotly)
 library(DT)
+#install.packages("ggiraph")
+library(ggiraph)
 ```
+## The Data
+```{r, message=FALSE,warning=FALSE}
+#| code-fold: true
+#| code-summary: "Show the code"
+ds2 <- read_rds("https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot_orig.rds")
+datatable(head(ds2))
+```
+
 
 ## Plot 1 (Using ggiraph)
 ```{r, message=FALSE,warning=FALSE}
 #| code-fold: true
 #| code-summary: "Show the code"
-ds1 <- read_csv("https://raw.githubusercontent.com/bobbyjy/MyData/main/job_retention-hopa.txt")
+gg <- ds2 %>% 
+  select(taster_name) %>% 
+  group_by(taster_name) %>% 
+  summarise(taster_name, reviews = n()) %>% 
+  distinct() %>% 
+  arrange(reviews) %>% 
+  ggplot(aes(reviews,reorder(taster_name,reviews), fill = taster_name))+
+  #geom_col()+
+  geom_col_interactive(aes(tooltip = taster_name, data_id = taster_name), show.legend = FALSE)+
+  scale_fill_viridis_d()+
+  labs(title = "Which tasters have tasted the most?")
 
-datatable(head(ds1))
+x <- girafe(ggobj = gg, width_svg = 8, height_svg = 6,
+            options = list(
+              opts_hover_inv(css = "opacity:0.1;"),
+              opts_hover(css= "stroke-width:2;")
+            ))
+
+x
 ```
 
 ## Plot 2 (Using Plotly)
 ```{r, message=FALSE,warning=FALSE}
 #| code-fold: true
 #| code-summary: "Show the code"
-ds2 <- read_rds("https://raw.githubusercontent.com/bobbyjy/MyData/main/pinot_orig.rds")
-
-datatable(head(ds2, n = 3))
-
 a<-ds2 %>% 
   ggplot(aes(price,points, text = paste("tasted by: ", taster_name,
                                         "<br>",
