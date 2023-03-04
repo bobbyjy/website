@@ -69,5 +69,12 @@ x <- girafe(ggobj = gg, width_svg = 8, height_svg = 6,
 x
 ```
 :::
+::: {.incremental}
+
+```{r}
+#I'm doing some more testing
+```
+
+:::
 
 
