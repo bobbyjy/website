@@ -1,5 +1,5 @@
 ---
-title: "Some cool things..."
+title: "Projects"
 listing:
   contents: "posts/*/index.qmd"
   feed: true
